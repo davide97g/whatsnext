@@ -7,11 +7,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-tally text-bg hover:bg-tally/90",
+        primary:
+          "bg-tally text-bg hover:bg-tally/90 shadow-[0_0_0_rgba(246,168,33,0)] hover:shadow-[0_0_28px_-4px_var(--color-tally)]",
         surface: "bg-surface-2 text-ink border border-line-strong hover:border-tally/60 hover:text-tally",
         ghost: "text-muted hover:text-ink hover:bg-surface-2",
         danger: "bg-transparent text-live border border-live/40 hover:bg-live/10",
-        live: "bg-live text-white hover:bg-live/90",
+        live: "bg-live text-white hover:bg-live/90 hover:shadow-[0_0_28px_-4px_var(--color-live)]",
       },
       size: {
         sm: "h-8 px-3 text-[0.68rem]",

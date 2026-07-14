@@ -1,15 +1,17 @@
-import { Radio, Video } from "lucide-react";
+import { ArrowUpRight, Radio, Video } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Countdown } from "@/components/Countdown.tsx";
 import { fullDate } from "@/lib/format.ts";
-import type { NextResponse, RoadmapItem } from "@/lib/types.ts";
+import { itemTarget, type NextResponse, type RoadmapItem } from "@/lib/types.ts";
 import { cn } from "@/lib/utils.ts";
 
 function LeadEntry({ kind, item }: { kind: "video" | "live"; item: RoadmapItem | null }) {
   const isLive = kind === "live";
   const Icon = isLive ? Radio : Video;
   const label = isLive ? "Next live" : "Next video";
+  const target = item ? itemTarget(item) : null;
 
-  return (
+  const body = (
     <div className="flex min-h-[190px] flex-col justify-between gap-6 p-6 sm:p-7">
       <div className="flex items-center justify-between">
         <span className="eyebrow inline-flex items-center gap-2">
@@ -17,13 +19,18 @@ function LeadEntry({ kind, item }: { kind: "video" | "live"; item: RoadmapItem |
           {label}
         </span>
         {item && (
-          <span
-            className={cn(
-              "tally-dot size-2",
-              isLive ? "bg-live text-live" : "bg-tally text-tally",
+          <span className="inline-flex items-center gap-2">
+            {target?.external && (
+              <ArrowUpRight className="size-3.5 text-faint transition-colors group-hover/lead:text-ink" />
             )}
-            aria-hidden
-          />
+            <span
+              className={cn(
+                "tally-dot size-2",
+                isLive ? "tally-dot--live bg-live text-live" : "bg-tally text-tally",
+              )}
+              aria-hidden
+            />
+          </span>
         )}
       </div>
 
@@ -54,6 +61,19 @@ function LeadEntry({ kind, item }: { kind: "video" | "live"; item: RoadmapItem |
         </div>
       )}
     </div>
+  );
+
+  if (!target) return body;
+
+  const cls = "group/lead block transition-colors hover:bg-surface-2";
+  return target.external ? (
+    <a href={target.href} target="_blank" rel="noreferrer" className={cls}>
+      {body}
+    </a>
+  ) : (
+    <Link to={target.href} className={cls}>
+      {body}
+    </Link>
   );
 }
 

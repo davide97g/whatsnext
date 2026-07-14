@@ -113,7 +113,7 @@ function EventCard({ p, startHour }: { p: Placed; startHour: number }) {
           {time}
         </span>
         {onAir ? (
-          <span className="tally-dot size-1.5 shrink-0 bg-live text-live" aria-hidden />
+          <span className="tally-dot tally-dot--live size-1.5 shrink-0 bg-live text-live" aria-hidden />
         ) : (
           href && (
             <ArrowUpRight className="size-3 shrink-0 text-faint opacity-0 transition-opacity group-hover:opacity-100" />

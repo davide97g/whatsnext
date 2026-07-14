@@ -42,7 +42,7 @@ const envSchema = z.object({
   GITHUB_URL: z.string().default(""),
   LINKEDIN_URL: z.string().default(""),
   CHANNEL_BLURB: z.string().default(""),
-  CHANNEL_NAME: z.string().default("whatsnext"),
+  CHANNEL_NAME: z.string().default("Davide Ghiotto"),
 });
 
 export type Env = z.infer<typeof envSchema>;

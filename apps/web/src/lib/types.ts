@@ -27,6 +27,12 @@ export interface RoadmapItem {
   updatedAt: string;
 }
 
+/** Where a lead item links: its YouTube page when we have one, else the board. */
+export function itemTarget(item: RoadmapItem | null): { href: string; external: boolean } {
+  if (item?.youtubeUrl) return { href: item.youtubeUrl, external: true };
+  return { href: "/roadmap", external: false };
+}
+
 export interface BoardColumn {
   status: ItemStatus;
   items: RoadmapItem[];
