@@ -15,8 +15,7 @@ export function RoadmapBoard({ board }: { board: BoardColumn[] }) {
   if (stages.length === 0) {
     return (
       <div className="rounded-[var(--radius)] border border-dashed border-line-strong p-16 text-center">
-        <p className="font-display text-lg text-muted">Nothing on the board yet.</p>
-        <p className="eyebrow mt-2 text-faint">Check back soon</p>
+        <p className="font-display text-lg text-muted">Nothing here yet.</p>
       </div>
     );
   }

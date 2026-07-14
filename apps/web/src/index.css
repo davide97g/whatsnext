@@ -125,16 +125,6 @@
     linear-gradient(180deg, #fdeef6 0%, #f3edfc 50%, var(--color-bg) 100%);
 }
 
-/* Dot dissolve — cream dots that thicken downward, melting the
-   pastel band into the page. Sweet polka halftone. */
-.dither {
-  background-image: radial-gradient(circle, var(--color-bg) 1.1px, transparent 1.8px);
-  background-size: 6px 6px;
-  background-position: center;
-  -webkit-mask-image: linear-gradient(180deg, transparent 6%, #000 96%);
-  mask-image: linear-gradient(180deg, transparent 6%, #000 96%);
-}
-
 /* Thumbnail sheen — a whisper of light dots, full-colour thumbs. */
 .thumb-screen {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0.7px, transparent 1.3px);
@@ -164,33 +154,6 @@
     transform: scale(2.2);
     opacity: 0;
   }
-}
-
-/* Masthead reveal on load — the guide "pops in". */
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.rise {
-  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.rise-1 {
-  animation-delay: 0.05s;
-}
-.rise-2 {
-  animation-delay: 0.14s;
-}
-.rise-3 {
-  animation-delay: 0.24s;
-}
-.rise-4 {
-  animation-delay: 0.34s;
 }
 
 @media (prefers-reduced-motion: reduce) {

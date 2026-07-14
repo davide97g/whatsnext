@@ -47,9 +47,8 @@ function LeadEntry({ kind, item }: { kind: "video" | "live"; item: RoadmapItem |
         <div>
           <span className="font-mono text-4xl text-faint tabular-nums sm:text-5xl">--:--:--</span>
           <div className="mt-4 border-t border-line pt-3">
-            <div className="font-display text-lg text-muted">Nothing on the wire yet</div>
-            <div className="mt-1 font-mono text-[0.68rem] uppercase tracking-widest text-faint">
-              No {isLive ? "live stream" : "video"} scheduled
+            <div className="font-display text-lg text-muted">
+              Nothing scheduled
             </div>
           </div>
         </div>

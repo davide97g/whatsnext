@@ -17,11 +17,8 @@ function PublicLayout() {
         <Outlet />
       </main>
       <footer className="border-t-2 border-line-strong">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-6 sm:px-6">
-          <span className="eyebrow text-faint">
-            {links?.channelName ?? "whatsnext"} — programming guide
-          </span>
-          <span className="eyebrow text-faint">Broadcast in public · Est. 2026</span>
+        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+          <span className="eyebrow text-faint">{links?.channelName ?? "whatsnext"}</span>
         </div>
       </footer>
     </div>

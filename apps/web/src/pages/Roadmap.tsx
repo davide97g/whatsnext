@@ -4,7 +4,7 @@ import { useState } from "react";
 import { RoadmapBoard } from "@/components/RoadmapBoard.tsx";
 import { WeekSchedule } from "@/components/WeekSchedule.tsx";
 import { api } from "@/lib/api.ts";
-import { addDays, dateline, startOfWeek, weekRangeLabel } from "@/lib/format.ts";
+import { addDays, startOfWeek, weekRangeLabel } from "@/lib/format.ts";
 import { cn } from "@/lib/utils.ts";
 
 type Filter = "all" | "video" | "live";
@@ -60,25 +60,10 @@ export function Roadmap() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line-strong pb-4">
-        <span className="eyebrow">The full guide</span>
-        <span className="eyebrow ml-auto text-faint">Updated {dateline()}</span>
-      </div>
-
-      <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="masthead text-[clamp(2.75rem,9vw,6rem)] text-ink">The board</h1>
-          <p className="mt-4 max-w-lg font-display text-lg leading-relaxed text-muted">
-            {view === "board" ? (
-              <>
-                Every video and stream, from first idea to published. Read top to bottom — each
-                stage is one step closer to on-air.
-              </>
-            ) : (
-              <>The week&rsquo;s schedule, laid out like a programming guide. Scheduled slots only.</>
-            )}
-          </p>
-        </div>
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <h1 className="masthead text-[clamp(2.75rem,9vw,6rem)] text-ink">
+          {view === "board" ? "Board" : "Week"}
+        </h1>
 
         <div className="flex flex-col items-start gap-2 sm:items-end">
           <Segmented options={VIEWS} value={view} onChange={setView} />
@@ -118,11 +103,9 @@ export function Roadmap() {
       )}
 
       <div className={view === "week" ? "mt-6" : "mt-12"}>
-        {isLoading && <p className="eyebrow text-muted">Loading the guide…</p>}
+        {isLoading && <p className="eyebrow text-muted">Loading…</p>}
         {isError && (
-          <p className="font-display text-lg text-live">
-            Couldn&rsquo;t load the guide. Try refreshing the page.
-          </p>
+          <p className="font-display text-lg text-live">Couldn&rsquo;t load. Try again.</p>
         )}
         {data &&
           (view === "board" ? (

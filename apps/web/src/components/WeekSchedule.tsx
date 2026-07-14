@@ -290,8 +290,7 @@ export function WeekSchedule({
 
             {inWeek.length === 0 && (
               <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 text-center">
-                <p className="font-display text-lg text-muted">No broadcasts scheduled this week.</p>
-                <p className="eyebrow mt-1 text-faint">Try another week, or read the board</p>
+                <p className="font-display text-lg text-muted">Nothing scheduled this week.</p>
               </div>
             )}
           </div>
@@ -302,8 +301,7 @@ export function WeekSchedule({
       <div className="sm:hidden">
         {inWeek.length === 0 ? (
           <div className="rounded-[var(--radius)] border border-dashed border-line-strong p-12 text-center">
-            <p className="font-display text-lg text-muted">No broadcasts scheduled this week.</p>
-            <p className="eyebrow mt-2 text-faint">Try another week</p>
+            <p className="font-display text-lg text-muted">Nothing scheduled this week.</p>
           </div>
         ) : (
           <div className="flex flex-col gap-8">
