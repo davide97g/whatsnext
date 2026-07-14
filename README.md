@@ -41,14 +41,14 @@ bun run hash            # prints two forms; use the ".env" one locally
 # 4. Migrate + seed schema
 bun run db:migrate
 
-# 5. Run both apps (API :3000, web :5173)
+# 5. Run both apps (API :4823, web :4917)
 bun run dev
 #    or individually:
 bun run dev:api
 bun run dev:web
 ```
 
-The web app reads the API base URL from `VITE_API_URL` (defaults to `http://localhost:3000`).
+The web app reads the API base URL from `VITE_API_URL` (defaults to `http://localhost:4823`).
 
 > **⚠️ bcrypt hash in `.env`:** Bun's `.env` loader performs `$` variable expansion, and bcrypt
 > hashes contain `$`. `bun run hash` prints **two** lines — use the one labelled *"for a local

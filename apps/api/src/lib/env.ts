@@ -12,12 +12,12 @@ const boolish = z
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
-  PORT: z.coerce.number().int().positive().default(3000),
+  PORT: z.coerce.number().int().positive().default(4823),
 
   // Comma-separated list of allowed origins.
   CORS_ORIGIN: z
     .string()
-    .default("http://localhost:5173")
+    .default("http://localhost:4917")
     .transform((s) =>
       s
         .split(",")

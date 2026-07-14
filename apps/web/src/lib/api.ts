@@ -1,7 +1,7 @@
 import { clearToken, getToken } from "./auth.ts";
 import type { LinksResponse, NextResponse, RoadmapItem, RoadmapResponse } from "./types.ts";
 
-const BASE = (import.meta.env.VITE_API_URL ?? "http://localhost:3000").replace(/\/$/, "");
+const BASE = (import.meta.env.VITE_API_URL ?? "http://localhost:4823").replace(/\/$/, "");
 
 export class ApiError extends Error {
   constructor(
