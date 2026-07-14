@@ -60,7 +60,7 @@ function LeadEntry({ kind, item }: { kind: "video" | "live"; item: RoadmapItem |
 
 export function NextUp({ next }: { next: NextResponse }) {
   return (
-    <div className="overflow-hidden rounded-[var(--radius)] border border-line-strong bg-bg/55 backdrop-blur-sm">
+    <div className="card-soft overflow-hidden rounded-[var(--radius)] border border-line bg-surface">
       <div className="grid divide-y divide-line sm:grid-cols-2 sm:divide-x sm:divide-y-0">
         <LeadEntry kind="video" item={next.video} />
         <LeadEntry kind="live" item={next.live} />

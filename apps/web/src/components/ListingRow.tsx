@@ -89,16 +89,16 @@ export function ListingRow({ item, no }: { item: RoadmapItem; no: number }) {
 
       {/* thumbnail — a small broadcast still, screened until hover */}
       {item.thumbnailUrl && (
-        <div className="col-start-2 row-start-2 mt-1 w-full max-w-[13rem] overflow-hidden rounded-[var(--radius)] border border-line sm:col-start-4 sm:row-start-1 sm:mt-0 sm:w-40">
+        <div className="col-start-2 row-start-2 mt-1 w-full max-w-[13rem] overflow-hidden rounded-[calc(var(--radius)-4px)] border border-line sm:col-start-4 sm:row-start-1 sm:mt-0 sm:w-40">
           <div className="relative aspect-video">
             <img
               src={item.thumbnailUrl}
               alt=""
               loading="lazy"
-              className="size-full object-cover grayscale-[0.35] transition-all duration-500 group-hover:grayscale-0 group-hover:scale-[1.04]"
+              className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />
             <div
-              className="thumb-screen pointer-events-none absolute inset-0 opacity-70 transition-opacity duration-500 group-hover:opacity-0"
+              className="thumb-screen pointer-events-none absolute inset-0 opacity-40 transition-opacity duration-500 group-hover:opacity-0"
               aria-hidden
             />
           </div>

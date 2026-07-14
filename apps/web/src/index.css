@@ -1,40 +1,44 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────
-   whatsnext — "The Signal Guide"
-   A printed broadcast programming guide wrapping a live signal.
-   Warm near-black paper · dusk-gradient + halftone-dither hero ·
-   Anton masthead · Newsreader serif listings · Space Mono timecode.
-   Red is the on-air tally, reserved for LIVE only.
+   whatsnext — "Sweet Signal"
+   A bright, pastel programming guide. Warm cream paper ·
+   soft lavender/peach morning-sky hero · rounded Varela Round
+   nameplate · friendly Nunito Sans · Space Mono timecode.
+   Raspberry is the on-air tally, reserved for LIVE only.
    ───────────────────────────────────────────────────────────── */
 @theme {
-  --color-bg: #0c0a08; /* warm near-black newsprint at night */
-  --color-surface: #16120d;
-  --color-surface-2: #201a12;
-  --color-line: #2a2318;
-  --color-line-strong: #3c3324;
+  --color-bg: #fbf6ee; /* warm cream paper */
+  --color-surface: #ffffff;
+  --color-surface-2: #f3eefb; /* soft lavender wash */
+  --color-line: #ece5d9;
+  --color-line-strong: #e0d6c6;
 
-  --color-ink: #f2ebdd; /* warm paper white */
-  --color-muted: #a99c85;
-  --color-faint: #6f6553;
+  --color-ink: #2e2740; /* deep plum near-black */
+  --color-muted: #6e6786;
+  --color-faint: #a79fb6;
 
-  --color-tally: #f6a94e; /* dusk amber — primary accent, "on air soon" */
-  --color-tally-dim: #5c421c;
-  --color-live: #ff5147; /* broadcast red — LIVE only, never decorative */
-  --color-go: #63c98d; /* published/done confirmation green */
+  --color-tally: #7c5cfc; /* periwinkle — primary accent, "on air soon" */
+  --color-tally-dim: #ece7fd; /* pastel lavender fill */
+  --color-live: #e0466f; /* raspberry — LIVE only, never decorative */
+  --color-go: #22a06b; /* published/done confirmation green */
 
-  /* dusk sky stops — the live "signal" */
-  --dusk-1: #241a33; /* upper violet */
-  --dusk-2: #5b2f43; /* plum */
-  --dusk-3: #b5563a; /* horizon coral */
-  --dusk-4: #f6a94e; /* sun amber */
+  /* morning-sky stops — the live "signal", now soft + sweet */
+  --dusk-1: #e7e0fb; /* upper lavender */
+  --dusk-2: #f4dcf3; /* blossom */
+  --dusk-3: #ffd8d0; /* peach */
+  --dusk-4: #fff0c9; /* butter sun */
 
-  --font-masthead: "Anton", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
-  --font-sans: "Newsreader", ui-serif, Georgia, serif;
+  --font-masthead: "Varela Round", ui-rounded, "Hiragino Maru Gothic ProN", system-ui, sans-serif;
+  --font-display: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Space Mono", ui-monospace, "SF Mono", monospace;
 
-  --radius: 3px; /* print-crisp corners */
+  --radius: 16px; /* soft, rounded, cute */
+
+  /* soft pastel elevation for cards + sheets */
+  --shadow-soft: 0 1px 2px rgba(46, 39, 64, 0.04), 0 8px 24px -12px rgba(124, 92, 252, 0.22);
+  --shadow-lift: 0 2px 4px rgba(46, 39, 64, 0.05), 0 16px 40px -16px rgba(124, 92, 252, 0.3);
 }
 
 @layer base {
@@ -48,34 +52,27 @@
     background-color: var(--color-bg);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 1.02rem;
+    font-size: 1rem;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     min-height: 100dvh;
-    /* faint cinematic film grain over the whole page */
-    background-image: var(--grain);
-    background-attachment: fixed;
   }
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
+    font-weight: 800;
+    letter-spacing: -0.015em;
   }
   ::selection {
     background: var(--color-tally);
-    color: var(--color-bg);
+    color: #fff;
   }
   :focus-visible {
     outline: 2px solid var(--color-tally);
     outline-offset: 2px;
-    border-radius: 2px;
+    border-radius: 6px;
   }
-}
-
-@theme {
-  /* film grain as a data-URI turbulence tile, held very faint */
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
 /* ── Structural devices ─────────────────────────────────────── */
@@ -84,18 +81,22 @@
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-muted);
 }
 
-/* Masthead — Anton, condensed, loud. The guide's nameplate + big numerals. */
+/* Masthead — Varela Round, big + friendly. The guide's nameplate + numerals. */
 .masthead {
   font-family: var(--font-masthead);
   font-weight: 400;
-  letter-spacing: 0.005em;
-  line-height: 0.86;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.94;
+}
+
+/* Soft card lift used across surfaces. */
+.card-soft {
+  box-shadow: var(--shadow-soft);
 }
 
 /* Hairline rule used between listings and around sections. */
@@ -108,39 +109,39 @@
   border-top: 1.5px solid var(--color-line-strong);
 }
 
-/* ── Signature: the dusk signal + halftone dither ───────────── */
+/* ── Signature: the morning sky + soft dot dissolve ─────────── */
 
-/* Dusk sky — a golden-hour broadcast still behind the masthead. */
+/* Morning sky — a soft pastel gradient behind the masthead. */
 .dusk-sky {
   background:
     radial-gradient(
-      115% 82% at 50% 118%,
+      120% 90% at 50% 8%,
       var(--dusk-4) 0%,
-      var(--dusk-3) 20%,
-      var(--dusk-2) 44%,
-      var(--dusk-1) 68%,
+      var(--dusk-3) 26%,
+      var(--dusk-2) 52%,
+      var(--dusk-1) 74%,
       transparent 100%
     ),
-    linear-gradient(180deg, #0c0a08 0%, #17122a 55%, #0c0a08 100%);
+    linear-gradient(180deg, #fdeef6 0%, #f3edfc 50%, var(--color-bg) 100%);
 }
 
-/* Halftone dither — bg-colored dots that thicken downward, dissolving
-   the dusk band into the page. Print halftone ∩ broadcast signal grain. */
+/* Dot dissolve — cream dots that thicken downward, melting the
+   pastel band into the page. Sweet polka halftone. */
 .dither {
-  background-image: radial-gradient(circle, var(--color-bg) 1px, transparent 1.7px);
-  background-size: 5px 5px;
+  background-image: radial-gradient(circle, var(--color-bg) 1.1px, transparent 1.8px);
+  background-size: 6px 6px;
   background-position: center;
-  -webkit-mask-image: linear-gradient(180deg, transparent 8%, #000 96%);
-  mask-image: linear-gradient(180deg, transparent 8%, #000 96%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 6%, #000 96%);
+  mask-image: linear-gradient(180deg, transparent 6%, #000 96%);
 }
 
-/* Halftone dither for thumbnails — ink dots as a print screen on hover-off. */
+/* Thumbnail sheen — a whisper of light dots, full-colour thumbs. */
 .thumb-screen {
-  background-image: radial-gradient(circle, rgba(12, 10, 8, 0.55) 0.8px, transparent 1.4px);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0.7px, transparent 1.3px);
   background-size: 4px 4px;
 }
 
-/* The tally light — pulsing dot. Amber by default, red for live. */
+/* The tally light — pulsing dot. Periwinkle by default, raspberry for live. */
 .tally-dot {
   position: relative;
   border-radius: 9999px;
@@ -165,7 +166,7 @@
   }
 }
 
-/* Masthead reveal on load — the guide "prints in". */
+/* Masthead reveal on load — the guide "pops in". */
 @keyframes rise {
   from {
     opacity: 0;

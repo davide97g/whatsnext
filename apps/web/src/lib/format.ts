@@ -39,6 +39,46 @@ export function listingWhen(iso: string | null): { day: string; time: string } |
   return { day: `${wd} ${day} ${month}`, time };
 }
 
+/** Monday 00:00 (local) of the week containing `date`. */
+export function startOfWeek(date: Date): Date {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  const dow = (d.getDay() + 6) % 7; // Mon=0 … Sun=6
+  d.setDate(d.getDate() - dow);
+  return d;
+}
+
+export function addDays(date: Date, n: number): Date {
+  const d = new Date(date);
+  d.setDate(d.getDate() + n);
+  return d;
+}
+
+export function isSameDay(a: Date, b: Date): boolean {
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
+}
+
+/** Minutes elapsed since local midnight for an ISO timestamp. */
+export function minutesOfDay(iso: string): number {
+  const d = new Date(iso);
+  return d.getHours() * 60 + d.getMinutes();
+}
+
+/** Compact week range, e.g. "13–19 JUL" or "29 JUN – 5 JUL" across months. */
+export function weekRangeLabel(weekStart: Date): string {
+  const end = addDays(weekStart, 6);
+  const mon = (d: Date) => d.toLocaleString("en-US", { month: "short" }).toUpperCase();
+  const sm = mon(weekStart);
+  const em = mon(end);
+  return sm === em
+    ? `${weekStart.getDate()}–${end.getDate()} ${sm}`
+    : `${weekStart.getDate()} ${sm} – ${end.getDate()} ${em}`;
+}
+
 export interface Countdown {
   days: number;
   hours: number;
