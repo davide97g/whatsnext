@@ -1,0 +1,23 @@
+# Local development only — provides a Postgres instance.
+# In production, Postgres is a managed Dokploy database service.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: whatsnext-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: whatsnext
+      POSTGRES_PASSWORD: whatsnext
+      POSTGRES_DB: whatsnext
+    ports:
+      - "5432:5432"
+    volumes:
+      - whatsnext_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U whatsnext"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  whatsnext_pgdata:

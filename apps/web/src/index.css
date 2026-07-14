@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   whatsnext — "The Signal Guide"
+   A printed broadcast programming guide wrapping a live signal.
+   Warm near-black paper · dusk-gradient + halftone-dither hero ·
+   Anton masthead · Newsreader serif listings · Space Mono timecode.
+   Red is the on-air tally, reserved for LIVE only.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-bg: #0c0a08; /* warm near-black newsprint at night */
+  --color-surface: #16120d;
+  --color-surface-2: #201a12;
+  --color-line: #2a2318;
+  --color-line-strong: #3c3324;
+
+  --color-ink: #f2ebdd; /* warm paper white */
+  --color-muted: #a99c85;
+  --color-faint: #6f6553;
+
+  --color-tally: #f6a94e; /* dusk amber — primary accent, "on air soon" */
+  --color-tally-dim: #5c421c;
+  --color-live: #ff5147; /* broadcast red — LIVE only, never decorative */
+  --color-go: #63c98d; /* published/done confirmation green */
+
+  /* dusk sky stops — the live "signal" */
+  --dusk-1: #241a33; /* upper violet */
+  --dusk-2: #5b2f43; /* plum */
+  --dusk-3: #b5563a; /* horizon coral */
+  --dusk-4: #f6a94e; /* sun amber */
+
+  --font-masthead: "Anton", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono: "Space Mono", ui-monospace, "SF Mono", monospace;
+
+  --radius: 3px; /* print-crisp corners */
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+    /* faint cinematic film grain over the whole page */
+    background-image: var(--grain);
+    background-attachment: fixed;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--color-tally);
+    color: var(--color-bg);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-tally);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@theme {
+  /* film grain as a data-URI turbulence tile, held very faint */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* ── Structural devices ─────────────────────────────────────── */
+
+/* Eyebrow / label / dateline — mono, tracked, uppercase. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Masthead — Anton, condensed, loud. The guide's nameplate + big numerals. */
+.masthead {
+  font-family: var(--font-masthead);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+/* Hairline rule used between listings and around sections. */
+.rule {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+}
+.rule-strong {
+  border: 0;
+  border-top: 1.5px solid var(--color-line-strong);
+}
+
+/* ── Signature: the dusk signal + halftone dither ───────────── */
+
+/* Dusk sky — a golden-hour broadcast still behind the masthead. */
+.dusk-sky {
+  background:
+    radial-gradient(
+      115% 82% at 50% 118%,
+      var(--dusk-4) 0%,
+      var(--dusk-3) 20%,
+      var(--dusk-2) 44%,
+      var(--dusk-1) 68%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, #0c0a08 0%, #17122a 55%, #0c0a08 100%);
+}
+
+/* Halftone dither — bg-colored dots that thicken downward, dissolving
+   the dusk band into the page. Print halftone ∩ broadcast signal grain. */
+.dither {
+  background-image: radial-gradient(circle, var(--color-bg) 1px, transparent 1.7px);
+  background-size: 5px 5px;
+  background-position: center;
+  -webkit-mask-image: linear-gradient(180deg, transparent 8%, #000 96%);
+  mask-image: linear-gradient(180deg, transparent 8%, #000 96%);
+}
+
+/* Halftone dither for thumbnails — ink dots as a print screen on hover-off. */
+.thumb-screen {
+  background-image: radial-gradient(circle, rgba(12, 10, 8, 0.55) 0.8px, transparent 1.4px);
+  background-size: 4px 4px;
+}
+
+/* The tally light — pulsing dot. Amber by default, red for live. */
+.tally-dot {
+  position: relative;
+  border-radius: 9999px;
+}
+.tally-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.35;
+  animation: tally-pulse 2s ease-out infinite;
+}
+@keyframes tally-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Masthead reveal on load — the guide "prints in". */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.rise-1 {
+  animation-delay: 0.05s;
+}
+.rise-2 {
+  animation-delay: 0.14s;
+}
+.rise-3 {
+  animation-delay: 0.24s;
+}
+.rise-4 {
+  animation-delay: 0.34s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Slim scrollbars. */
+.thin-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  border-radius: 9999px;
+}
