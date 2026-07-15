@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { DateTimePicker } from "@/components/ui/date-time-picker.tsx";
 import { Input, Textarea } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
 import {
@@ -164,11 +165,10 @@ export function ItemDialog({ open, onOpenChange, item }: Props) {
 
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="scheduledAt">Scheduled for</Label>
-            <Input
+            <DateTimePicker
               id="scheduledAt"
-              type="datetime-local"
               value={form.scheduledAt}
-              onChange={(e) => set("scheduledAt", e.target.value)}
+              onChange={(v) => set("scheduledAt", v)}
             />
           </div>
 
